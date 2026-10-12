@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Auntie looks pretty serious right now 👀✨</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  background:#07090e;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:25px;
+}
+
+.container{
+  width:100%;
+  max-width:1100px;
+}
+
+.player-card{
+  width:100%;
+  padding:22px;
+  background:rgba(13,17,27,.95);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:24px;
+  box-shadow:0 25px 70px rgba(0,0,0,.75);
+}
+
+.video-box{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:#000;
+  border-radius:18px;
+  cursor:pointer;
+}
+
+.video-box video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#000;
+}
+
+.play-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,.2);
+  pointer-events:none;
+  transition:.25s;
+}
+
+.play-circle{
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  background:#e00000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 0 35px rgba(255,0,0,.6);
+}
+
+.play-circle svg{
+  width:36px;
+  height:36px;
+  fill:#fff;
+  margin-left:5px;
+}
+
+.video-box.playing .play-overlay{
+  opacity:0;
+}
+
+.video-title{
+  margin-top:18px;
+  font-size:20px;
+  line-height:1.4;
+}
+
+.watch-btn{
+  width:100%;
+  margin-top:18px;
+  padding:16px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(135deg,#e00000,#a00000);
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.watch-btn:hover{
+  opacity:.9;
+}
+
+.footer{
+  text-align:center;
+  margin-top:15px;
+  color:#64748b;
+  font-size:12px;
+}
+
+@media(max-width:600px){
+  body{
+    padding:10px;
+  }
+
+  .player-card{
+    padding:12px;
+    border-radius:18px;
+  }
+
+  .video-title{
+    font-size:16px;
+  }
+
+  .play-circle{
+    width:65px;
+    height:65px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="player-card">
+
+    <div id="videoBox" class="video-box">
+
+      <video
+        id="videoPlayer"
+        playsinline
+        preload="metadata"
+        controls
+      >
+        <source
+          src="https://cdn2.videy.co/yNmCilGK1.mp4"
+          type="video/mp4">
+      </video>
+
+      <div id="playOverlay" class="play-overlay">
+        <div class="play-circle">
+          <svg viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+    <h1 class="video-title">
+      Auntie looks pretty serious right now 👀✨
+    </h1>
+
+    <button id="watchBtn" class="watch-btn">
+      ▶ Watch Online
+    </button>
+
+    <div class="footer">
+      Powered by VideoPlay
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const videoBox = document.getElementById("videoBox");
+const video = document.getElementById("videoPlayer");
+const watchBtn = document.getElementById("watchBtn");
+
+/* Ganti dengan URL tujuan kamu */
+const targetUrl = "https://example.com/";
+
+function playVideo(){
+  video.play()
+    .then(function(){
+      videoBox.classList.add("playing");
+      watchBtn.textContent = "⏸ Pause Video";
+    })
+    .catch(function(){
+      videoBox.classList.remove("playing");
+    });
+}
+
+videoBox.addEventListener("click", function(e){
+
+  if(e.target.closest("video")){
+    return;
+  }
+
+  if(video.paused){
+    playVideo();
+  }else{
+    video.pause();
+  }
+
+});
+
+watchBtn.addEventListener("click", function(){
+
+  if(video.paused){
+    playVideo();
+  }else{
+    video.pause();
+  }
+
+  /*
+    Membuka URL secara jelas setelah klik tombol.
+    Hapus komentar di bawah jika ingin mengaktifkannya.
+  */
+
+  // window.open(
+  //   targetUrl,
+  //   "_blank",
+  //   "noopener,noreferrer"
+  // );
+
+});
+
+video.addEventListener("play", function(){
+  videoBox.classList.add("playing");
+  watchBtn.textContent = "⏸ Pause Video";
+});
+
+video.addEventListener("pause", function(){
+  videoBox.classList.remove("playing");
+  watchBtn.textContent = "▶ Watch Online";
+});
+
+video.addEventListener("error", function(){
+  watchBtn.textContent = "Video unavailable";
+});
+</script>
+
+</body>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4989715,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4989715&101" alt="" border="0"></a></noscript>
+<!-- Histats.com  END  -->
